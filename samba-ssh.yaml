@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: samba-ssh
+  name: samba-ssh
+spec:
+  ports:
+    - port: 139
+      targetPort: 139
+      name: samba1
+    - port: 445
+      targetPort: 445
+      name: samba2
+    - port: 22
+      targetPort: 22
+      name: ssh
+  selector:
+    name: samba-ssh
+---
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  labels:
+    name: samba-ssh
+  name: samba-ssh-controller
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: samba-ssh
+    spec:
+      containers:
+      - image: 10.15.7.164:8082/admin/samba-ssh
+        name: samba-ssh
+        ports:
+        - name: samba1
+          containerPort: 139
+          hostPort: 139
+      	- name: samba2
+      	  containerPort: 445
+	        hostPort: 445
+      	- name: ssh
+	        containerPort: 22
+	        hostPort: 22
+        volumeMounts:
+            - name: sabma-ssh-persistent-storage
+              mountPath: /data/db
+      volumes:
+        - name: samba-ssh-persistent-storage
+          hostPath:
+            path: /data
