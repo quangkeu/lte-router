@@ -43,11 +43,3 @@ spec:
           hostPort: 445
         - name: ssh
           containerPort: 22
-          hostPort: 22
-        volumeMounts:
-            - name: sabma-ssh-persistent-storage
-              mountPath: /data/db
-      volumes:
-        - name: samba-ssh-persistent-storage
-          hostPath:
-            path: /data
