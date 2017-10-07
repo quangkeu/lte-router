@@ -18,10 +18,6 @@ spec:
       port: 138
       targetPort: 138
       name: samba3
-    - protocol: UDP
-      port: 445
-      targetPort: 445
-      name: samba4
     - protocol: TCP
       port: 22
       targetPort: 22
@@ -53,7 +49,5 @@ spec:
           containerPort: 445
         - name: samba3
           containerPort: 138
-        - name: samba4
-          containerPort: 445
         - name: ssh
           containerPort: 22
