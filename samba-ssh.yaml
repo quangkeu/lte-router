@@ -38,10 +38,10 @@ spec:
         - name: samba1
           containerPort: 139
           hostPort: 139
-      	- name: samba2
+        - name: samba2
           containerPort: 445
           hostPort: 445
-      	- name: ssh
+        - name: ssh
           containerPort: 22
           hostPort: 22
         volumeMounts:
