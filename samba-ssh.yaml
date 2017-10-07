@@ -11,10 +11,6 @@ spec:
       targetPort: 139
       name: samba1
     - protocol: TCP
-      port: 445
-      targetPort: 445
-      name: samba2
-    - protocol: TCP
       port: 22
       targetPort: 22
       name: ssh
@@ -41,9 +37,5 @@ spec:
         ports:
         - name: samba1
           containerPort: 139
-          hostPort: 139
-        - name: samba2
-          containerPort: 445
-          hostPort: 445
         - name: ssh
           containerPort: 22
