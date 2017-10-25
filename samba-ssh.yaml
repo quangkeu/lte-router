@@ -9,17 +9,17 @@ spec:
     - protocol: TCP
       port: 139
       targetPort: 139
-      nodePort: 139
+      nodePort: 30001
       name: samba1
     - protocol: TCP
       port: 445
       targetPort: 445
-      nodePort: 445
+      nodePort: 30002
       name: samba2
     - protocol: TCP
       port: 22
       targetPort: 22
-      nodePort: 22222
+      nodePort: 30003
       name: ssh
   type: NodePort    
   selector:
