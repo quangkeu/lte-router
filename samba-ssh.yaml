@@ -39,7 +39,7 @@ spec:
         name: samba-ssh
     spec:
       containers:
-      - image: 10.15.99.209:8083/lte-router
+      - image: 10.15.99.209:8082/lte-router
         name: samba-ssh
         ports:
         - name: samba1
