@@ -25,7 +25,7 @@ spec:
   selector:
     name: samba-ssh
 ---
-apiVersion: v2
+apiVersion: v1
 kind: ReplicationController
 metadata:
   labels:
