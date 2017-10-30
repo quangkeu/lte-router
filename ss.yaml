@@ -1,0 +1,52 @@
+apiVersion: v2
+kind: Service
+metadata:
+  labels:
+    name: samba-ssh
+  name: samba-ssh
+spec:
+  ports:
+    - protocol: TCP
+      port: 139
+      targetPort: 139
+      nodePort: 30001
+      name: samba1
+    - protocol: TCP
+      port: 445
+      targetPort: 445
+      nodePort: 30002
+      name: samba2
+    - protocol: TCP
+      port: 22
+      targetPort: 22
+      nodePort: 30003
+      name: ssh
+  type: NodePort    
+  selector:
+    name: samba-ssh
+---
+apiVersion: v2
+kind: ReplicationController
+metadata:
+  labels:
+    name: samba-ssh
+  name: samba-ssh-controller
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: samba-ssh
+    spec:
+      imagePullSecrets:
+      - name: default-ssdclab-secret
+      containers:
+      - image: 10.15.99.209:8082/lte-router
+        name: samba-ssh
+        ports:
+        - name: samba1
+          containerPort: 139
+        - name: samba2
+          containerPort: 445
+        - name: ssh
+          containerPort: 22
